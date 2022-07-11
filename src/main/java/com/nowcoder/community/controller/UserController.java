@@ -1,5 +1,7 @@
 package com.nowcoder.community.controller;
 
+import com.google.code.kaptcha.Producer;
+import com.nowcoder.community.annotation.LoginRequired;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityUtil;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -49,14 +52,20 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private Producer kaptchaProducer;
+
+    @Autowired
     private HostHolder hostHolder;
 
+    @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage(){
         return "/site/setting";
     }
 
+
     // 处理上传请求
+    @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadHeader(MultipartFile headerImg, Model model){
         if (headerImg == null){
@@ -90,6 +99,7 @@ public class UserController {
     }
 
     // 修改密码
+    @LoginRequired
     @RequestMapping(path = "/uploadPassword", method = RequestMethod.POST)
     public String uploadPassword(String orignPassword,String newPassword, String newPassword1, Model model){
         if (!newPassword.equals(newPassword1)){
@@ -132,5 +142,20 @@ public class UserController {
             logger.error("读取头像失败:" + e.getMessage());
         }
     }
+
+//    @RequestMapping(path = "/forget", method = RequestMethod.POST)
+//    public String forgetPassword(String email, String code, String newPassword, Model model){
+//        // 检验邮箱是否注册过
+//        if (!userService.pdActivition(email)){
+//            model.addAttribute("emailMsg", "该邮箱未被注册！");
+//            return "/site/forget";
+//        }
+//        return "redirect:/login";
+//    }
+//
+//    @RequestMapping(path = "/getCode", method = RequestMethod.GET)
+//    public void getCode(HttpServletResponse response, HttpSession session){
+//        String text = kaptchaProducer.createText();
+//    }
 
 }

@@ -184,4 +184,12 @@ public class UserService implements CommunityConstant {
         String newPassword = CommunityUtil.md5(password + salt);
         return userMapper.updatePassword(userId, newPassword);
     }
+
+    // 判断邮箱是否注册
+    public boolean pdActivition(String email){
+        if (userMapper.selectByEmail(email) == null){
+            return false;
+        }
+        return true;
+    }
 }
