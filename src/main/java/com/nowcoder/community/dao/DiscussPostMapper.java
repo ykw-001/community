@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface DisscussPostMapper {
+public interface DiscussPostMapper {
 
     // offset表示起始行数，limit表示一页最多几个帖子
     List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);
@@ -16,5 +16,7 @@ public interface DisscussPostMapper {
     int selectDiscussPostRows(@Param("userId") int userId);
 
     int insertDiscussPost(DiscussPost discussPost);
+
+    DiscussPost selectDiscussPostById(int id);
 
 }

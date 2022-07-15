@@ -1,6 +1,6 @@
 package com.nowcoder.community.service;
 
-import com.nowcoder.community.dao.DisscussPostMapper;
+import com.nowcoder.community.dao.DiscussPostMapper;
 import com.nowcoder.community.entity.DiscussPost;
 import com.nowcoder.community.util.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +20,17 @@ import java.util.List;
 public class DiscussPostService {
 
     @Autowired
-    private DisscussPostMapper disscussPostMapper;
+    private DiscussPostMapper discussPostMapper;
 
     @Autowired
     private SensitiveFilter sensitiveFilter;
 
     public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit){
-        return disscussPostMapper.selectDiscussPosts(userId, offset, limit);
+        return discussPostMapper.selectDiscussPosts(userId, offset, limit);
     }
 
     public int findDiscussPostRows(int userId){
-        return disscussPostMapper.selectDiscussPostRows(userId);
+        return discussPostMapper.selectDiscussPostRows(userId);
     }
 
     public int addDiscussPost(DiscussPost post){
@@ -46,7 +46,10 @@ public class DiscussPostService {
         post.setTitle(sensitiveFilter.filter(post.getTitle()));
         post.setContent(sensitiveFilter.filter(post.getContent()));
 
-        return disscussPostMapper.insertDiscussPost(post);
+        return discussPostMapper.insertDiscussPost(post);
     }
 
+    public DiscussPost findDiscussPostById(int id){
+        return discussPostMapper.selectDiscussPostById(id);
+    }
 }

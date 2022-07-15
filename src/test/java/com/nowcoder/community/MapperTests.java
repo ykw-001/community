@@ -1,6 +1,6 @@
 package com.nowcoder.community;
 
-import com.nowcoder.community.dao.DisscussPostMapper;
+import com.nowcoder.community.dao.DiscussPostMapper;
 import com.nowcoder.community.dao.LoginTicketMapper;
 import com.nowcoder.community.dao.UserMapper;
 import com.nowcoder.community.entity.DiscussPost;
@@ -32,7 +32,7 @@ public class MapperTests {
     private UserMapper userMapper;
 
     @Autowired
-    private DisscussPostMapper disscussPostMapper;
+    private DiscussPostMapper disscussPostMapper;
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
