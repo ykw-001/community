@@ -63,7 +63,6 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     }
 
     // 请求结束后清除数据
-
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         hostHolder.clear();
