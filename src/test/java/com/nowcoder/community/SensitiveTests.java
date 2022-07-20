@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Scanner;
+
 /**
  * 测试敏感词过滤
  *
@@ -32,6 +34,15 @@ public class SensitiveTests {
         String text1 = "☆f☆a☆b☆c☆";
         text1 = sensitiveFilter.filter(text1);
         System.out.println(text1);
+    }
+
+    @Test
+    public void test(){
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        String[] words = str.split("\\s+");
+        int len = words.length;
+        System.out.println(words[len-1].length());
     }
 
 }
